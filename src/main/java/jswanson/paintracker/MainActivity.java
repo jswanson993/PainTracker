@@ -1,8 +1,10 @@
 package jswanson.paintracker;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -10,7 +12,6 @@ import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity {
     private DbHandler myDbHandler;
-    private TextView timeText;
     private ImageButton button;
 
     @Override
@@ -18,8 +19,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         myDbHandler = new DbHandler(this);
-        timeText = (TextView) findViewById(R.id.timeText);
         ImageButtonListener();
+        ButtonListener();
 
     }
 
@@ -31,6 +32,19 @@ public class MainActivity extends AppCompatActivity {
                 addTimeClicked(v);
             }
         });
+    }
+
+    public void ButtonListener(){
+        Button b = (Button)findViewById(R.id.calendar_button);
+        b.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+
+                Intent intent = new Intent(MainActivity.this, Calandar.class);
+                startActivity(intent);
+            }
+        });
+
     }
 
     public void addTimeClicked(View view) {
